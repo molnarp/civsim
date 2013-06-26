@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Run script for civsim
+#
+JAVA_BIN=$(which java)
+if [ -z "${JAVA_BIN}" ]; then
+    echo "Java executable not found." >&2
+    exit 1;
+fi
+
+MYDIR=`dirname $(readlink -f $0)`/..
+${JAVA_BIN} -cp .:${MYDIR}/dist/civsim.jar:${MYDIR}/lib/commons-cli-1.2.jar:${MYDIR}/lib/javacsv-2.1.jar \
+    civsim.Civsim $@
