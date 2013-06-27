@@ -5,10 +5,11 @@ writes output to CSV files. Combat is between players A and B, where A is the at
 (ie. B plays his unit first).
 
 Prerequisites:
- - JRE 7 (JDK 7 to build)
- - Apache Ant to build the application.
+ - Java Runtime Environment 7
 
-To build, run:
+Civsim downloads: https://www.dropbox.com/sh/76ksihrfyhvwn20/2uI3GjBGGx
+
+To build you need JDK 7, and Apache Ant, and the run:
 
 $ ant clean,jar
 
