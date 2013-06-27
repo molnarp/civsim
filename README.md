@@ -11,24 +11,22 @@ Civsim downloads: https://www.dropbox.com/sh/76ksihrfyhvwn20/2uI3GjBGGx
 
 To build you need JDK 7, and Apache Ant, and the run:
 
-$ ant clean,jar
+``$ ant clean,jar``
 
 Binary standalone distribution is built in the dist/ folder.
 
 To run the application:
 
-$ bin/civsim [options]
+``$ bin/civsim [options]``
 
-Add --help to see available command line switches.
+Add `--help` to see available command line switches.
 
 TODO: run script for Windows users.
 
 Run example: 
-$ bin/civsim -u i1c1a1,i2c2a2 -f Trumped,TrumpMiss  -a Metalworking -s 111222.csv \
-    -o 111222o.csv -c 111222c.csv
+``$ bin/civsim -u i1c1a1,i2c2a2 -f Trumped,TrumpMiss  -a Metalworking -s 111222.csv -o 111222o.csv -c 111222c.csv``
 
-This will simulate
-See help for further details.
+This will simulate a combat between Player A having Infantry(1),Cavalry(1),Artillery(1) + Metalworking ability against Player B having Infantry(2),Cavalry(2),Artillery(2) and no abilities. The combat summary is written into 111222.csv, individual outcomes are written into 111222o.csv and full combat history for each combat is written into 111222c.csv.
 
 Units:
  - Each unit is defined as a letter prefix from [icar] followed by it's strength. Strength is arbitary but must be a single digit. Multiple units are defined as a single word of unit definitions, such as i1c2a3. The comma character separates units of player A and B, for example a1,i2c2.
