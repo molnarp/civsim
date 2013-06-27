@@ -1024,7 +1024,7 @@ is divided into following sections:
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
-    <target depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,-do-jar-with-mainclass,-do-jar-with-libraries,-post-jar,-bin" description="Build JAR." name="jar"/>
+    <target depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,-do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR." name="jar"/>
     <!--
                 =================
                 EXECUTION SECTION
@@ -1407,10 +1407,5 @@ is divided into following sections:
                 <mapper from="transfer.*" to="*" type="glob"/>
             </propertyset>
         </ant>
-    </target>
-    <target name="-bin" description="Copy run script to bin/ directory.">
-        <mkdir dir="${dist.dir}/bin"/>
-        <copy file="${basedir}/bin/civsim-dist" tofile="${dist.dir}/bin/civsim"/>
-        <chmod file="${dist.dir}/bin/civsim" perm="0755"/>
     </target>
 </project>

@@ -8,6 +8,6 @@ if [ -z "${JAVA_BIN}" ]; then
     exit 1;
 fi
 
-CIVSIM_DIR=`dirname $(readlink -f $0)`/..
+CIVSIM_DIR=`dirname $(readlink -f $0)`
 ${JAVA_BIN} -cp .:${CIVSIM_DIR}/civsim.jar:${CIVSIM_DIR}/lib/commons-cli-1.2.jar:${CIVSIM_DIR}/lib/javacsv-2.1.jar \
     civsim.Civsim $@

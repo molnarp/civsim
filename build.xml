@@ -71,4 +71,16 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-libs" description="Copy libraries to dist directory.">
+        <mkdir dir="${dist.dir}/lib"/>
+        <copy todir="${dist.dir}/lib">
+	    <fileset dir="${basedir}/lib"/>
+        </copy>
+    </target>
+    <target name="-bin" description="Copy run script to bin/ directory.">
+        <copy file="${basedir}/bin/civsim-dist" tofile="${dist.dir}/civsim"/>
+        <copy file="${basedir}/bin/civsim-dist.bat" tofile="${dist.dir}/civsim.bat"/>
+        <chmod file="${dist.dir}/civsim" perm="0755"/>
+    </target>
+    <target depends="-libs,-bin" name="-post-jar" description="Copy run script to bin/ directory."/>
 </project>
