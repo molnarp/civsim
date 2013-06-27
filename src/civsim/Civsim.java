@@ -82,25 +82,23 @@ public class Civsim {
             // Create filter for futile moves - moves that result in a unit lost without effect
             Tree<CombatState> resultTree = Tree.buildBfs(new Node<>(startState, null), 
                     new CombatStateExpander(), filters);
+
+            // Sort leafs based on score
+            List<Node<CombatState>> leafs = new ArrayList<>(resultTree.getLeafs().size());
+            leafs.addAll(resultTree.getLeafs());
+            Collections.sort(leafs, CombatState.SCORE_COMPARATOR);        
             
             // Write summary file
             if (cli.hasOption("s")) {
-                writeSummary(resultTree, cli.getOptionValue("s"));
+                writeSummary(leafs, cli.getOptionValue("s"));
             }
             
-            if (cli.hasOption("o") || cli.hasOption("c")) {
-                // Sort leafs based on score
-                List<Node<CombatState>> leafs = new ArrayList<>(resultTree.getLeafs().size());
-                leafs.addAll(resultTree.getLeafs());
-                Collections.sort(leafs, CombatState.SCORE_COMPARATOR);        
-                
-                if (cli.hasOption("o")) {
-                    writeOutcomes(resultTree, leafs, cli.getOptionValue("o"));
-                }
-                
-                if (cli.hasOption("c")) {
-                    writeCombats(resultTree, leafs, cli.getOptionValue("c"));
-                }
+            if (cli.hasOption("o")) {
+                writeOutcomes(leafs, cli.getOptionValue("o"));
+            }
+
+            if (cli.hasOption("c")) {
+                writeCombats(leafs, cli.getOptionValue("c"));
             }
             
             
@@ -112,10 +110,10 @@ public class Civsim {
         }
     }
     
-    public static void writeSummary(Tree<CombatState> resultTree, String summaryFile) {
+    public static void writeSummary(List<Node<CombatState>> leafs, String summaryFile) {
         // Create result statistics
         Map<Integer,Integer> resultMap = new HashMap<>();
-        for (Node<CombatState> node : resultTree.getLeafs()) {
+        for (Node<CombatState> node : leafs) {
             // Calculate score
             int score = node.getData().getSimpleScore();
             
@@ -130,6 +128,7 @@ public class Civsim {
         List<Integer> scoreList = new ArrayList<>(resultMap.size());
         scoreList.addAll(resultMap.keySet());
         Collections.sort(scoreList);
+        Collections.reverse(scoreList);
         
         // Write summary results
         CsvWriter cw = new CsvWriter(summaryFile);
@@ -151,16 +150,17 @@ public class Civsim {
         }        
     }
     
-    public static void writeOutcomes(Tree<CombatState> resultTree, 
-            List<Node<CombatState>> leafs, String outcomesFile) {
+    public static void writeOutcomes(List<Node<CombatState>> leafs, String outcomesFile) {
         
         // Write combat results
         CsvWriter cw = new CsvWriter(outcomesFile);
+        long combatNo = 0;
         try {
-            cw.writeRecord(new String[] { "score", "fronts" });
+            cw.writeRecord(new String[] { "combat_no", "score", "fronts" });
             
             for (Node<CombatState> n : leafs) {
                 cw.writeRecord(new String[] { 
+                    Long.toString(combatNo), 
                     Integer.toString(n.getData().getSimpleScore()), n.getData().toString() });
             }
         
@@ -172,8 +172,7 @@ public class Civsim {
         }
     }
     
-    public static void writeCombats(Tree<CombatState> resultTree, 
-            List<Node<CombatState>> leafs, String combatFile) {
+    public static void writeCombats(List<Node<CombatState>> leafs, String combatFile) {
         
         // Write combat results
         CsvWriter cw = new CsvWriter(combatFile);

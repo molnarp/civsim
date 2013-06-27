@@ -11,7 +11,7 @@ import civsim.tree.Node;
  *
  * @author Peter Molnar <mp@nanasoft.hu>
  */
-public class FutileMoveFilter implements Filter<CombatState> {
+public class TrumpedFilter implements Filter<CombatState> {
 
     @Override
     public boolean filterNode(Node<CombatState> node) {

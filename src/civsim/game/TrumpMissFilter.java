@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * @author Peter Molnar <mp@nanasoft.hu>
  */
-public class NonTrumpingMoveFilter implements Filter<CombatState> {
+public class TrumpMissFilter implements Filter<CombatState> {
 
     @Override
     public boolean filterNode(Node<CombatState> node) {

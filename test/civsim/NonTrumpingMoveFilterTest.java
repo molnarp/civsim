@@ -8,7 +8,7 @@ package civsim;
 import civsim.game.Abilities;
 import civsim.game.CombatState;
 import civsim.game.Front;
-import civsim.game.NonTrumpingMoveFilter;
+import civsim.game.TrumpMissFilter;
 import civsim.game.Player;
 import civsim.game.Unit;
 import civsim.game.UnitType;
@@ -50,7 +50,7 @@ public class NonTrumpingMoveFilterTest {
         CombatState current = new CombatState(currentHands, Player.B, currentFronts, Abilities.NO_ABILITIES);
         Node<CombatState> currentNode = new Node<>(current, parentNode);
         
-        NonTrumpingMoveFilter filter = new NonTrumpingMoveFilter();
+        TrumpMissFilter filter = new TrumpMissFilter();
         
         Assert.assertTrue(filter.filterNode(currentNode));
     }
@@ -80,7 +80,7 @@ public class NonTrumpingMoveFilterTest {
         CombatState current = new CombatState(currentHands, Player.B, currentFronts, Abilities.NO_ABILITIES);
         Node<CombatState> currentNode = new Node<>(current, parentNode);
         
-        NonTrumpingMoveFilter filter = new NonTrumpingMoveFilter();
+        TrumpMissFilter filter = new TrumpMissFilter();
         
         Assert.assertFalse(filter.filterNode(currentNode));
     }

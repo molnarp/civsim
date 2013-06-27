@@ -5,8 +5,8 @@
 package civsim;
 
 import civsim.game.CombatState;
-import civsim.game.FutileMoveFilter;
-import civsim.game.NonTrumpingMoveFilter;
+import civsim.game.TrumpedFilter;
+import civsim.game.TrumpMissFilter;
 import civsim.tree.Filter;
 import civsim.tree.Node;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ import java.util.List;
  */
 public enum Filters implements Filter<CombatState> {
     
-    FutileMove(new FutileMoveFilter()),
-    NonTrumpingMove(new NonTrumpingMoveFilter());
+    Trumped(new TrumpedFilter()),
+    TrumpMiss(new TrumpMissFilter());
     
     private final Filter<CombatState> filter;
 
