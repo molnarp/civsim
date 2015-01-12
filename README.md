@@ -1,6 +1,6 @@
 README
 
-This application simulates a combat according to Civilization: The Board Game rules, and
+This application simulates a combat according to Civilization: The Board Game (core set) rules, and
 writes output to CSV files. Combat is between players A and B, where A is the attacker 
 (ie. B plays his unit first).
 
